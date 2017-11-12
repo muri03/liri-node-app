@@ -11,8 +11,8 @@ var twitterKeys = new Twitter({
 
 var spotify = new Spotify({
 
-    Client id: 			 'da70605231ce42698f53464b5915b87f',
-    Client secret: 		 '9bb28face3c644839f9bc8a005adbe4e',
+    id: 			 'da70605231ce42698f53464b5915b87f',
+    secret: 		 '9bb28face3c644839f9bc8a005adbe4e',
 
 });
 
