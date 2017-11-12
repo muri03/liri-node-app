@@ -22,3 +22,24 @@ inquirer.prompt([{
       console.log("\nThat's okay " + inquirerResponse.username + ", come again when you are more sure.\n");
     }
   });
+
+
+    var Twit = require('twit');
+
+var config = require('./keys');
+
+var T = new Twit(config);
+
+var params = {
+        q: 'm2nucamp',
+        count: 20
+    }
+
+    T.get('search/tweets', params, gotData);
+
+    function gotData(err, data, response) {
+        var tweets = data.statuses;
+        for (var i = 0; i < tweets.length; i++){
+        console.log('\n > ' + tweets[i].created_at + ': ' + tweets[i].text);
+    }
+    };
