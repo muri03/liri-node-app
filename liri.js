@@ -58,16 +58,16 @@ function spot (input) {
   });
 }
 
-// Function called if error is returned during spot function. Defaults to song 'The Sing' by ace of base 
+// Function called if error. Defaults to song 'The Sing' by ace of base 
 function spotErr() {
   spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
     if ( err ) {
       console.log('Error occurred: ' + err);
     } else if (!err) {
       console.log("Song: The Sign");
-      console.log("Artist: " + JSON.stringify(data.tracks.items[3].album.artists[0].name, null, 2));
-      console.log("Preview Link: " + JSON.stringify(data.tracks.items[3].album.artists[0].external_urls.spotify, null, 2));
-      console.log("Album: " + JSON.stringify(data.tracks.items[3].album.name, null, 2));
+      console.log("Artist: Ace the Base");
+      console.log("Preview Link: https://open.spotify.com/album/0nQFgMfnmWrcWDOQqIgJL7");
+      console.log("Album: Greatest Hits");
     }
   });
 
