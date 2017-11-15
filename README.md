@@ -8,9 +8,9 @@
 	* Twitter - This will show my last 20 tweets and when they were created at in the terminal/bash window.
 		* (Terminal) $node liri.js my-tweets
 	* Spotify - This will show the Artist's name, song's name, link, and album about the song in the terminal/bash window. If error occurs, it defaults to " The Sign by Ace the Base".
-		* (Terminal) $node liri.js spotify-this-song '<song name here>'.
+		* (Terminal) $node liri.js spotify-this-song 'add song name here'.
 	* Request to grab data from OMDB API - This show the title of the movie and other relevant information about the movie selected. If error occurs, it defaults to "Mr. Nobody".
-		* (Terminal) $node liri.js movie-this '<movie name here>'.
+		* (Terminal) $node liri.js movie-this 'add movie name here'.
 	* FS Node package - LIRI will take the text inside of random.txt and then use it to call spotify-this-song for "I Want it That Way".
 		* (Terminal) $node liri.js do-what-it-says.
 
