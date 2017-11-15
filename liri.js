@@ -91,18 +91,18 @@ function spotErr() {
 
 
 function req() {
-  var queryUrl = "ttp://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=40e9cece";
+ var queryUrl = "http://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=40e9cece";
   request(queryUrl, function(error, response, body) {
-    if (!error) {
-      console.log("Title: " + JSON.parse(body).Title);
-      console.log("Release Year: " + JSON.parse(body).Year);
-      console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-      console.log("Country of Production: " + JSON.parse(body).Country);
-      console.log("Language: " + JSON.parse(body).Language);
-      console.log("Plot: " + JSON.parse(body).Plot);
-      console.log("Actors: " + JSON.parse(body).Actors);
-      console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[0].Value);
-    } else if (error) { 
+  if (!error) {
+    console.log("Title: " + JSON.parse(body).Title);
+    console.log("Release Year: " + JSON.parse(body).Year);
+    console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+    console.log("Country of Production: " + JSON.parse(body).Country);
+    console.log("Language: " + JSON.parse(body).Language);
+    console.log("Plot: " + JSON.parse(body).Plot);
+    console.log("Actors: " + JSON.parse(body).Actors);
+    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+  } else if (error) {
         // If error, call function err();
         err();
     }
@@ -121,9 +121,9 @@ function err () {
     console.log("Language: " + JSON.parse(body).Language);
     console.log("Plot: " + JSON.parse(body).Plot);
     console.log("Actors: " + JSON.parse(body).Actors);
-    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[0].Value);
-    }
-
+    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+  }
+  
   });
 
 }
