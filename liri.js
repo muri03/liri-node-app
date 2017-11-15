@@ -1,16 +1,31 @@
+var key = require("./keys.js");
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
+var request = require("request");
 var fs = require('fs');
-var key = require("./keys.js");
-var client = new Twitter(key);
+
+// var client = newTwitter();
+var op = process.argv[2];
+var input = process.argv[3];
+
+var spotify = new Spotify({
+    id: key.key.id,
+    secret: key.key.secret
+});
+
+var newTwitter = new Twitter({
+  consumer_key:key.client.consumer_secret,
+    consumer_secret: key.client.consumer_secret,
+    access_token: key.client.consumer_secret,
+    access_token_secret: key.client.consumer_secret,
+
+    });
+
+
 
 // For twitter get
 // var twitterKeys = require("keys.js");
 var params = {screen_name: 'm2nucamp'};
-
-var op = process.argv[2];
-
-var input = process.argv[3];
 
 var tweets;
 
@@ -28,7 +43,7 @@ if (op === "my-tweets") {
 
  // Used to gather last 20 tweets
 function myTweets() {
-	client.get('statuses/user_timeline', params, function(error, tweets, response) {
+	newTwitter.get('statuses/user_timeline', params, function(error, tweets, response) {
   if (!error) {
     var max = 20;
     for (i=0; i<tweets.length; i++) {
@@ -58,7 +73,7 @@ function spot (input) {
   });
 }
 
-// Function called if error. Defaults to song 'The Sing' by ace of base 
+// Function called if error. Defaults to song 'The Sign' by ace of base 
 function spotErr() {
   spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
     if ( err ) {
@@ -71,4 +86,54 @@ function spotErr() {
     }
   });
 
+}
+// Function for movie information
+
+
+function req() {
+  var queryUrl = "ttp://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=40e9cece";
+  request(queryUrl, function(error, response, body) {
+    if (!error) {
+      console.log("Title: " + JSON.parse(body).Title);
+      console.log("Release Year: " + JSON.parse(body).Year);
+      console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+      console.log("Country of Production: " + JSON.parse(body).Country);
+      console.log("Language: " + JSON.parse(body).Language);
+      console.log("Plot: " + JSON.parse(body).Plot);
+      console.log("Actors: " + JSON.parse(body).Actors);
+      console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[0].Value);
+    } else if (error) { 
+        // If error, call function err();
+        err();
+    }
+  });
+}
+
+// Function called if error occurs in req() function. Defaults to Mr.Nobody
+function err () {
+  var queryUrl = "http://www.omdbapi.com/?t=t=Mr.Nobody&y=&plot=short&apikey=40e9cece";
+  request(queryUrl, function(error, response, body) {
+    if(!error) {
+    console.log("Title: " + JSON.parse(body).Title);
+    console.log("Release Year: " + JSON.parse(body).Year);
+    console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+    console.log("Country of Production: " + JSON.parse(body).Country);
+    console.log("Language: " + JSON.parse(body).Language);
+    console.log("Plot: " + JSON.parse(body).Plot);
+    console.log("Actors: " + JSON.parse(body).Actors);
+    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[0].Value);
+    }
+
+  });
+
+}
+
+
+function doIt () {
+  fs.readFile("random.txt", "utf8", function(error, data) {
+    // console.log(data);
+    var dataArr = data.split(",");
+    // console.log(dataArr[1]);
+    spot(dataArr[1]);
+  });
 }
