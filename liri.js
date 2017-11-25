@@ -19,8 +19,6 @@ var newTwitter = new Twitter({
 
     });
 
-
-
 // For twitter get
 var params = {screen_name: 'm2nucamp'};
 
@@ -35,8 +33,6 @@ if (op === "my-tweets") {
 } else if (op === "do-what-it-says"){
 	doWhat();
 } 
-
-
 
  // Used to gather last 20 tweets
 function myTweets() {
@@ -123,7 +119,7 @@ function err () {
 
 }
 
-
+// Function called for do-what-it-says
 function doWhat() {
   fs.readFile("random.txt", "utf8", function(error, data) {
     // console.log(data);
