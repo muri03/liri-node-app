@@ -3,8 +3,6 @@ var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var request = require("request");
 var fs = require('fs');
-
-// var client = newTwitter();
 var op = process.argv[2];
 var input = process.argv[3];
 
@@ -24,7 +22,6 @@ var newTwitter = new Twitter({
 
 
 // For twitter get
-// var twitterKeys = require("keys.js");
 var params = {screen_name: 'm2nucamp'};
 
 var tweets;
@@ -34,9 +31,9 @@ if (op === "my-tweets") {
 } else if (op === "spotify-this-song"){
 	spot(input);
 } else if (op === "movie-this") {
-	req();
+	reqMovie();
 } else if (op === "do-what-it-says"){
-	doIt();
+	doWhat();
 } 
 
 
@@ -58,12 +55,12 @@ function myTweets() {
   });
 }
 
-
+// For Spotify
 function spot (input) {
   spotify.search({ type: 'track', query: input }, function(err, data) {
     if (err) {
         // Upon error, call spotErr function
-        spotErr();
+        spotError();
     } else if (!err) {
       console.log("Song: " + input);
       console.log("Artist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name, null, 2));
@@ -73,8 +70,8 @@ function spot (input) {
   });
 }
 
-// Function called if error. Defaults to song 'The Sign' by ace of base 
-function spotErr() {
+// Function called if error. Defaults to song 'The Sign' by Ace the Base 
+function spotError() {
   spotify.search({ type: 'track', query: 'The Sign' }, function(err, data) {
     if ( err ) {
       console.log('Error occurred: ' + err);
@@ -88,9 +85,7 @@ function spotErr() {
 
 }
 // Function for movie information
-
-
-function req() {
+function reqMovie() {
  var queryUrl = "http://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=40e9cece";
   request(queryUrl, function(error, response, body) {
   if (!error) {
@@ -109,7 +104,7 @@ function req() {
   });
 }
 
-// Function called if error occurs in req() function. Defaults to Mr.Nobody
+// Function called if error occurs in reqMovie() function. Defaults to Mr.Nobody
 function err () {
   var queryUrl = "http://www.omdbapi.com/?t=t=Mr.Nobody&y=&plot=short&apikey=40e9cece";
   request(queryUrl, function(error, response, body) {
@@ -129,7 +124,7 @@ function err () {
 }
 
 
-function doIt () {
+function doWhat() {
   fs.readFile("random.txt", "utf8", function(error, data) {
     // console.log(data);
     var dataArr = data.split(",");
